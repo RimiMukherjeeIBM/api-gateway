@@ -1,0 +1,16 @@
+
+server:
+  port: 9090
+
+#Below part is not required.
+
+zuul:
+  routes:
+    rws:
+      path: /rwsMetaData
+      url: http://localhost:8100
+    customer:
+      path: /customer/**
+      url: http://localhost:8081/customer
+
+  
