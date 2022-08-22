@@ -1,4 +1,6 @@
-
+spring:
+  profiles:
+    active: ${spring-active-profile}
 server:
   port: 9090
 
