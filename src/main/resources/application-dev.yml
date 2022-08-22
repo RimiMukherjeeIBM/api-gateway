@@ -1,8 +1,0 @@
-
-zuul:
-  routes:
-    rws:
-      path: /rwsMetaData
-      url: https://hbr-hm-rws-service.rduehbdsrdp.eu-gb.codeengine.appdomain.cloud
-
-  

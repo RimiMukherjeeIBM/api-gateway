@@ -1,6 +1,4 @@
-spring:
-  profiles:
-    active: ${spring-active-profile}
+
 server:
   port: 9090
 
@@ -10,7 +8,7 @@ zuul:
   routes:
     rws:
       path: /rwsMetaData
-      url: http://localhost:8100
+      url: ${rws.url}
     customer:
       path: /customer/**
       url: http://localhost:8081/customer
