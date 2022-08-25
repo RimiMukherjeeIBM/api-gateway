@@ -1,16 +1,16 @@
 
 server:
-  port: 9090
+  port: 8082
 
 #Below part is not required.
 
 zuul:
   routes:
     rws:
-      path: /rwsMetaData
+      path: /rws/**
       url: ${rws.url}
-    customer:
-      path: /customer/**
-      url: http://localhost:8081/customer
+    #customer:
+      #path: /customer/**
+      #url: http://localhost:8081/customer
 
   
