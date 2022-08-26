@@ -1,12 +1,16 @@
 package com.apig.filters;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
 public class PreFilter extends ZuulFilter{
 

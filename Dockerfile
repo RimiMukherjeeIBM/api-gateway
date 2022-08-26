@@ -18,6 +18,6 @@ RUN mvn initialize
 
 RUN mvn install
 
-EXPOSE 9090
+EXPOSE 8082
 
 CMD java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar ./target/*-SNAPSHOT.jar

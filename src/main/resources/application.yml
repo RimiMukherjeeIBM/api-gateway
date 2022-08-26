@@ -1,16 +1,22 @@
 
 server:
-  port: 9090
+  port: 8082
 
 #Below part is not required.
 
 zuul:
+  ignoredPatterns: /v3/api-docs, /v3/api-docs/swagger-config
   routes:
     rws:
-      path: /rwsMetaData
-      url: ${rws.url}
-    customer:
-      path: /customer/**
-      url: http://localhost:8081/customer
+      path: /rws/**
+      url: ${rws.url:http://localhost:8100}
+    #customer:
+      #path: /customer/**
+      #url: http://localhost:8081/customer
+    apis:
+      path: /v3/api-docs/**
+      url: http://localhost:8082
+
+
 
   

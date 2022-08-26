@@ -1,12 +1,19 @@
 package com.apig;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
+import org.springdoc.core.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.netflix.zuul.filters.Route;
+import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,10 +24,21 @@ import com.apig.filters.PostFilter;
 import com.apig.filters.PreFilter;
 import com.apig.filters.RouteFilter;
 import com.apig.jwtfilter.JwtFilter;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.servers.Server;
 
 @SpringBootApplication
 @EnableZuulProxy
 //@EnableEurekaClient
+/*@OpenAPIDefinition(servers = @Server(url = "${zuul.routes.apis.url}"),
+		info = @Info(title = "rws-service-test", description = "REST API Endpoints",
+		termsOfService = "http://www-03.ibm.com/software/sla/sladb.nsf/sla/bm?Open",
+		contact = @Contact(name = "portofrotterdam",
+				email = "portofrotterdam@nl.ibm.com"),
+		license = @License(name = "Apache License Version 2.0", url = "LICENSE URL"), version = "1.0"))*/
 public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
@@ -70,5 +88,17 @@ public class ApiGatewayApplication {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-	
+
+	@Autowired
+	RouteLocator locator;
+
+	/*@Bean
+	public List<GroupedOpenApi> apis() {
+		final List<GroupedOpenApi> groups = new ArrayList<>();
+		List<Route> definitions = locator.getRoutes();
+		definitions.stream().forEach(route -> {
+			groups.add(GroupedOpenApi.builder().pathsToMatch(route.getPath()).group(route.getId()).build());
+		});
+		return groups;
+	}*/
 }
