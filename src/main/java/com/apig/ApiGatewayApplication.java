@@ -55,7 +55,7 @@ public class ApiGatewayApplication {
     // Set the filter on this bean
     registrationBean.setFilter(new JwtFilter("supersecret"));
     // Set the relevant URL pattern
-    registrationBean.addUrlPatterns("/api/v1/order/*", "/api/v1/user/*");
+    registrationBean.addUrlPatterns("/rws/*", "/customer/*");
     return registrationBean;
 	}
 	

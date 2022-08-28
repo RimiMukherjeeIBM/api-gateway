@@ -8,9 +8,13 @@ zuul:
   routes:
     rws:
       path: /rws/**
-      url: ${rws.url}
-    #customer:
-      #path: /customer/**
-      #url: http://localhost:8081/customer
+      url: ${rws.url:http://localhost:8100}
+    customer:
+      path: /customer/**
+      url: http://localhost:8081/customer
+
+clientIdSecret:
+  test: test
+  clientId1: clientSecret1
 
   
