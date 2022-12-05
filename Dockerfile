@@ -1,5 +1,5 @@
-FROM openjdk:8-jre
-FROM maven:alpine
+# Build
+FROM maven:3.8.6-ibmjava-8 AS build
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
    LOGGING_PATH=/var/log \
@@ -16,8 +16,19 @@ COPY . .
 
 RUN mvn initialize
 
-RUN mvn install
+RUN mvn install -Ddependency-check.skip=true
 
-EXPOSE 8082
+# Run
+FROM ibm-semeru-runtimes:open-8-jdk
+RUN apt-get update -y
+RUN apt-get upgrade -y
 
-CMD java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar ./target/*-SNAPSHOT.jar
+ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
+   LOGGING_PATH=/var/log \
+   JAVA_OPTS=""
+
+COPY --from=build /usr/src/app/target/*.jar /usr/app/
+
+EXPOSE 8080
+
+CMD java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /usr/app/*.jar
