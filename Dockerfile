@@ -29,6 +29,6 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 
 COPY --from=build /usr/src/app/target/*.jar /usr/app/
 
-EXPOSE 8080
+EXPOSE 8082
 
 CMD java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /usr/app/*.jar
